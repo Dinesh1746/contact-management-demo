@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+        <h1 style="color: white; font-size: 24px;">Contact Management System Crud</h1>
+        <div>
+            <button class="btn btn-success" routerLink="/addcontact">Add Contact</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" routerLink="/login-signup">Logout</button>
+        </div>
+    </div>
+</nav>
+<div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="image">
+                <img src ="https://www.getsharedcontacts.com/wp-content/uploads/2022/01/The-short-guide-to-Contact-Management-1024x576.png" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="col-sm-7">
+        <table class="table table-borderless mt-2">
+        <thead>
+            <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">City</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let item of data">
+            <td>{{item.firstname}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.phonenumber}}</td>
+            <td>{{item.city}}</td>
+            <td><i style="color: blue;" class="fas fa-edit" routerLink="/updatecontact/{{item.id}}"></i>&nbsp;
+                <i style="color: red;" class="fas fa-trash" (click)="deletecontacts(item.id)"></i></td>
+            </tr>
+        </tbody>
+        </table>
+        </div>
+
+    </div>
+</div>
+

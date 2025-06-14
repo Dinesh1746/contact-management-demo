@@ -1,0 +1,106 @@
+<!-- login -->
+<section class="vh-100" *ngIf="!isShow">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col col-x1-9">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-4 col-1g-6">
+                            <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-2650.jpg?w=740&t=st%3D1682081909%7Eexp%3D1682082509%7Ehmac%3D28a4193142064138f62f8ba0637224cdf47879ae87c04fb55d7782d86f0dde06"
+                                class="img-fluid">
+                        </div>
+
+                        <div class="col-md-6 col-1g-6 align-items-center">
+                            <div class="card-body p-4 p-1g-5 text-black">
+                                <form [formGroup] = "loginform"> 
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: orange"></i> I
+                                        <span class="h1 fw-bold mb-0">Login</span>
+                                    </div>
+                                    <h5 class="fw-normal mb-3 pb-2" style="letter-spacing: 1px;">Login into your Account
+                                    </h5>
+
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Email address</label>
+                                        <input type="email" class="form-control form-control-1g" placeholder="Enter Email"
+                                        formControlName = "email">
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control form-control-1g" placeholder="Enter Password"
+                                        formControlName = "password">
+                                    </div>
+                                    <div class="pt-1 mb-3 text-center">
+                                        <button class="btn btn-dark" [disabled]="loginform.invalid" (click)="onloginSubmit()" type="button">Login</button>
+                                    </div>
+                                    <p class="mt-5 pb-lg-2">Don't have an account?
+                                    <a (click)="signup()" style="color: black;cursor: pointer;font-weight: 700;">signUp here</a>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- signUp -->
+
+<section class="vh-100" *ngIf="isShow">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col col-x1-9">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-4 col-1g-6">
+                            <img src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg?w=740&t=st%3D1682087756%7Eexp%3D1682088356%7Ehmac%3D85a61c7a0fdf72289e90e196123f17057dadf1de6e71a772c8cd323a03b24355"
+                                class="img-fluid">
+                        </div>
+
+                        <div class="col-md-6 col-1g-6 align-items-center">
+                            <div class="card-body p-4 p-1g-5 text-black">
+                                <form [formGroup]="signupform">
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: orange"></i> I
+                                        <span class="h1 fw-bold mb-0">Signup</span>
+                                    </div>
+                                    <h5 class="fw-normal mb-3 pb-2" style="letter-spacing: 1px;">signup into your Account
+                                    </h5>
+
+                                     <div class="form-outline mb-2">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control form-control-1g" placeholder="Enter Name"
+                                        formControlName = "name"> 
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Email address</label>
+                                        <input type="email" class="form-control form-control-1g" placeholder="Enter Email"
+                                        formControlName = "email"> 
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control form-control-1g" placeholder="Enter Password"
+                                        formControlName = "password"> 
+                                    </div>
+                                    <div class="pt-1 mb-3 text-center">
+                                        <button class="btn btn-success" [disabled]="signupform.invalid" (click)="onsignupSubmit()" type="button">Signup</button>
+                                    </div>
+                                    <p class="mt-5 pb-lg-2">Already have an account?
+                                    <a (click)="login()" style="color: black;cursor: pointer;font-weight: 700;">login here</a>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
