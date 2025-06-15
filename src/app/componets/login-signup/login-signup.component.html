@@ -12,7 +12,7 @@
 
                         <div class="col-md-6 col-1g-6 align-items-center">
                             <div class="card-body p-4 p-1g-5 text-black">
-                                <form [formGroup] = "loginform"> 
+                                <form [formGroup]="loginform">
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: orange"></i> I
                                         <span class="h1 fw-bold mb-0">Login</span>
@@ -21,21 +21,40 @@
                                     </h5>
 
                                     <div class="form-outline mb-2">
-                                        <label class="form-label">Email address</label>
-                                        <input type="email" class="form-control form-control-1g" placeholder="Enter Email"
-                                        formControlName = "email">
+                                        <label class="form-label">Email address<span style="color: red;">*</span></label>
+                                        <input type="email" class="form-control form-control-1g"
+                                            placeholder="Enter Email" formControlName="email">
+                                        <div *ngIf="loginform.get('email')?.touched && loginform.get('email')?.invalid"
+                                            class="text-danger">
+                                            <div *ngIf="loginform.get('email')?.errors?.['required']">Email is required.
+                                            </div>
+                                            <div *ngIf="loginform.get('email')?.errors?.['email']">Enter a valid email
+                                                address.</div>
+                                        </div>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control form-control-1g" placeholder="Enter Password"
-                                        formControlName = "password">
+                                        <label class="form-label">Password<span style="color: red;">*</span></label>
+                                        <input type="password" class="form-control form-control-1g"
+                                            placeholder="Enter Password" formControlName="password">
+                                        <div *ngIf="loginform.get('password')?.touched && loginform.get('password')?.invalid"
+                                            class="text-danger">
+                                            <div *ngIf="loginform.get('password')?.errors?.['required']">Password is
+                                                required.</div>
+                                            <div *ngIf="loginform.get('password')?.errors?.['pattern']">
+                                                Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 Number
+                                                and 1 special character.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="pt-1 mb-3 text-center">
-                                        <button class="btn btn-dark" [disabled]="loginform.invalid" (click)="onloginSubmit()" type="button">Login</button>
+                                        <button class="btn btn-dark" [disabled]="loginform.invalid"
+                                            (click)="onloginSubmit()" type="button">Login</button>
                                     </div>
                                     <p class="mt-5 pb-lg-2">Don't have an account?
-                                    <a (click)="signup()" style="color: black;cursor: pointer;font-weight: 700;">signUp here</a>
+                                        <a (click)="signup()"
+                                            style="color: black;cursor: pointer;font-weight: 700;">signUp here</a>
                                     </p>
                                 </form>
                             </div>
@@ -68,31 +87,58 @@
                                         <i class="fas fa-cubes fa-2x me-3" style="color: orange"></i> I
                                         <span class="h1 fw-bold mb-0">Signup</span>
                                     </div>
-                                    <h5 class="fw-normal mb-3 pb-2" style="letter-spacing: 1px;">signup into your Account
+                                    <h5 class="fw-normal mb-3 pb-2" style="letter-spacing: 1px;">signup into your
+                                        Account
                                     </h5>
 
-                                     <div class="form-outline mb-2">
-                                        <label class="form-label">Name</label>
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Name<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control form-control-1g" placeholder="Enter Name"
-                                        formControlName = "name"> 
+                                            formControlName="name">
+                                        <div *ngIf="signupform.get('name')?.touched && signupform.get('name')?.invalid"
+                                            class="text-danger">
+                                            <div *ngIf="signupform.get('name')?.errors?.['required']">Name is
+                                                required.
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <label class="form-label">Email address</label>
-                                        <input type="email" class="form-control form-control-1g" placeholder="Enter Email"
-                                        formControlName = "email"> 
+                                        <label class="form-label">Email address<span style="color: red;">*</span></label>
+                                        <input type="email" class="form-control form-control-1g"
+                                            placeholder="Enter Email" formControlName="email">
+                                        <div *ngIf="signupform.get('email')?.touched && signupform.get('email')?.invalid"
+                                            class="text-danger">
+                                            <div *ngIf="signupform.get('email')?.errors?.['required']">Email is
+                                                required.
+                                            </div>
+                                            <div *ngIf="signupform.get('email')?.errors?.['email']">Enter a valid email
+                                                address.</div>
+                                        </div>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control form-control-1g" placeholder="Enter Password"
-                                        formControlName = "password"> 
+                                        <label class="form-label">Password<span style="color: red;">*</span></label>
+                                        <input type="password" class="form-control form-control-1g"
+                                            placeholder="Enter Password" formControlName="password">
+                                        <div *ngIf="signupform.get('password')?.touched && signupform.get('password')?.invalid"
+                                            class="text-danger">
+                                            <div *ngIf="signupform.get('password')?.errors?.['required']">Password is
+                                                required.</div>
+                                            <div *ngIf="signupform.get('password')?.errors?.['pattern']">
+                                                Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 Number
+                                                and 1 special character.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="pt-1 mb-3 text-center">
-                                        <button class="btn btn-success" [disabled]="signupform.invalid" (click)="onsignupSubmit()" type="button">Signup</button>
+                                        <button class="btn btn-success" [disabled]="signupform.invalid"
+                                            (click)="onsignupSubmit()" type="button">Signup</button>
                                     </div>
                                     <p class="mt-5 pb-lg-2">Already have an account?
-                                    <a (click)="login()" style="color: black;cursor: pointer;font-weight: 700;">login here</a>
+                                        <a (click)="login()"
+                                            style="color: black;cursor: pointer;font-weight: 700;">login here</a>
                                     </p>
                                 </form>
                             </div>

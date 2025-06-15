@@ -20,19 +20,35 @@ export class AddContactComponent implements OnInit {
     this.contactform = this.formbuilder.group({
       firstname:['',Validators.required],
       lastname:['',Validators.required],
-      phonenumber:['',Validators.required],
+      phonenumber:['',[Validators.required,Validators.pattern(/^[0-9]{10}$/)]],
       city:['',Validators.required],
       
     })
   }
 
-  submitcontact(data: contact){ 
-     //console.log(this.contactform.value);
-      this.api.addcontact(data).subscribe((res =>{
-       this.contactform.reset();
-       this.router.navigate(["/contactlist"]);
-     }))  
-    
+  submitcontact(data: contact) {
+    if (this.contactform.valid) {
+      this.api.addcontact(data).subscribe({
+        next: (res) => {
+          this.contactform.reset();
+          this.router.navigate(["/contactlist"]);
+        },
+        error: (err) => {
+          if (err.status === 0) {
+            // Server is down or unreachable
+            alert("Cannot connect to the server, Please Connect Server.");
+          } else if (err.status === 400) {
+            alert("Bad request. Please check the input.");
+          } else if (err.status === 409) {
+            alert("User already exists.");
+          } else {
+            // Generic error
+            alert("An error occurred during Add Contact. Please try again.");
+          }
+          console.error("Add Contact error:", err);
+        }
+      });
+    }
   }
 
 

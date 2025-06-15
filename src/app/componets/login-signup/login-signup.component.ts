@@ -23,44 +23,75 @@ export class LoginSignupComponent implements OnInit {
     this.signupform = this.formbuilder.group({
       name: ['', Validators.required],
        email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/)]]
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/)]]
     });
 
     this.loginform = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/)]]
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/)]]
     })
       
   }
 
-  onsignupSubmit(){
-    if(this.signupform.valid){
-      this.api.addsignupdata(this.signupform.value).subscribe(res=>{
-        alert("Sign up Successful !!!");
-        this.signupform.reset();
-      })
-    }
-  }
-
-  onloginSubmit(){
-    if(this.loginform.valid){
-      this.api.getusersdata(this.loginform.value).subscribe(res=>{
-        const user = res.find((a:any) =>{
-          return a.email == this.loginform.value.email &&
-          a.password == this.loginform.value.password
-        })
-
-        if(user){
-          alert("login successful !!!");
-          this.loginform.reset();
-          this.router.navigate(['/contactlist'])
-        }else{
-          alert("User Not Found !!!");
-          this.loginform.reset();
+  onsignupSubmit() {
+    if (this.signupform.valid) {
+      this.api.addsignupdata(this.signupform.value).subscribe({
+        next: (res) => {
+          alert("Sign up Successful !!!");
+          this.signupform.reset();
+          this.isShow = false;
+        },
+        error: (err) => {
+          if (err.status === 0) {
+            // Server is down or unreachable
+            alert("Cannot connect to the server, Please Connect Server.");
+          } else if (err.status === 400) {
+            alert("Bad request. Please check the input.");
+          } else if (err.status === 409) {
+            alert("User already exists.");
+          } else {
+            // Generic error
+            alert("An error occurred during signup. Please try again.");
+          }
+          console.error("Signup error:", err);
         }
-      })
+      });
     }
   }
+
+
+  onloginSubmit() {
+    if (this.loginform.valid) {
+      this.api.getusersdata(this.loginform.value).subscribe({
+        next: (res: any[]) => {
+          const user = res.find((a: any) => {
+            return a.email === this.loginform.value.email &&
+                  a.password === this.loginform.value.password;
+          });
+
+          if (user) {
+            alert("Login successful !!!");
+            this.loginform.reset();
+            this.router.navigate(['/contactlist']);
+          } else {
+            alert("User Not Found !!!");
+            this.loginform.reset();
+          }
+        },
+        error: (err) => {
+          if (err.status === 0) {
+            alert("Cannot connect to the server, Please Connect Server.");
+          } else if (err.status === 400) {
+            alert("Bad request. Please check your input.");
+          } else {
+            alert("An error occurred during login. Please try again.");
+          }
+          console.error("Login error:", err);
+        }
+      });
+    }
+  }
+
 
 
   signup(){

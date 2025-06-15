@@ -6,13 +6,6 @@
       "lastname": "Ede",
       "phonenumber": 7997402944,
       "city": "Hyd"
-    },
-    {
-      "id": "3777",
-      "firstname": "Tarun",
-      "lastname": "EDE",
-      "phonenumber": 966916815,
-      "city": "HYD"
     }
   ],
   "signup": [
@@ -27,6 +20,12 @@
       "name": "tarun",
       "email": "tarun@gmail.com",
       "password": "Tarun@123"
+    },
+    {
+      "id": "86bb",
+      "name": "Rohini",
+      "email": "Rohini@gmail.com",
+      "password": "Rohini@123"
     }
   ]
 }

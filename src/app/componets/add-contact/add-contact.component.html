@@ -13,27 +13,51 @@
 
                     <form [formGroup]="contactform">
                         <div class="form-group mb-1">
-                            <label for="exampleInputEmail1">First Name</label>
+                            <label for="exampleInputEmail1">First Name<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" formControlName="firstname"
                                 placeholder="Enter First Name">
+                            <div *ngIf="contactform.get('firstname')?.touched && contactform.get('firstname')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="contactform.get('firstname')?.errors?.['required']">FirstName is required.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-1">
-                            <label for="exampleInputEmail1">Last Name</label>
+                            <label for="exampleInputEmail1">Last Name<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" formControlName="lastname"
                                 placeholder="Enter Last Name">
+                            <div *ngIf="contactform.get('lastname')?.touched && contactform.get('lastname')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="contactform.get('lastname')?.errors?.['required']">LastName is required
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-1">
-                            <label for="exampleInputEmail1">Phone Number</label>
+                            <label for="exampleInputEmail1">Phone Number<span style="color: red;">*</span></label>
                             <input type="number" class="form-control" formControlName="phonenumber"
                                 placeholder="Enter Phone Number">
+                            <div *ngIf="contactform.get('phonenumber')?.touched && contactform.get('phonenumber')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="contactform.get('phonenumber')?.errors?.['required']">Phone Number is
+                                    required</div>
+                                <div *ngIf="contactform.get('phonenumber')?.errors?.['pattern']">
+                                    Phone Number must be 10 digits
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-1">
-                            <label for="exampleInputEmail1">City</label>
+                            <label for="exampleInputEmail1">City<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" formControlName="city" placeholder="Enter City">
+                            <div *ngIf="contactform.get('city')?.touched && contactform.get('city')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="contactform.get('city')?.errors?.['required']">City is required
+                                </div>
+                            </div>
                         </div>
 
                         <div class="text-center mt-2">
-                            <button type="submit" (click)="submitcontact(this.contactform.value)" [disabled]="contactform.invalid" class="btn btn-primary">Submit</button>&nbsp;
+                            <button type="submit" (click)="submitcontact(this.contactform.value)"
+                                [disabled]="contactform.invalid" class="btn btn-primary">Submit</button>&nbsp;
                             <button type="submit" class="btn btn-success" routerLink="/contactlist">Back</button>
                         </div>
 
