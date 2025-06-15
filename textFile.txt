@@ -1,0 +1,2 @@
+json-server --watch db.json --port 3000 -- to run fake server(json db)
+ng serve -- to run angular application
