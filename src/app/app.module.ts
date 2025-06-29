@@ -8,6 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateContactComponent } from './componets/update-contact/update-contact.component';
 import { LoginSignupComponent } from './componets/login-signup/login-signup.component';
+import { FilterPipe } from './filter.pipe';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -16,14 +20,20 @@ import { LoginSignupComponent } from './componets/login-signup/login-signup.comp
     ContactlistComponent,
     AddContactComponent,
     UpdateContactComponent,
-    LoginSignupComponent
+    LoginSignupComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-left'
+    })
   ],
   providers: [
     provideClientHydration()

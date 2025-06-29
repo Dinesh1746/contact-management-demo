@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { contact } from '../contactModel';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-contactlist',
@@ -9,7 +10,8 @@ import { contact } from '../contactModel';
 })
 export class ContactlistComponent implements OnInit {
   data:any | contact[]
-  constructor(private api: ApiService) {
+  searchtext:any;
+  constructor(private api: ApiService, private notification: NotificationService) {
 
   }
   ngOnInit(): void {
@@ -24,9 +26,13 @@ export class ContactlistComponent implements OnInit {
 
   deletecontacts(id:number){
     this.api.deletecontact(id).subscribe(res=>{
-      alert("Contact Deleted Successful !!!");
+      this.notification.showSuccess("Contact Deleted Successful !!!");
       this.getcontacts();
     })
+  }
+
+  logout(){
+    sessionStorage.removeItem("loginData");
   }
 
 }

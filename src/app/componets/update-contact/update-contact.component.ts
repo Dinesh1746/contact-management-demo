@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { contact } from '../contactModel';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-update-contact',
@@ -15,7 +16,8 @@ export class UpdateContactComponent implements OnInit {
   constructor(
     private api: ApiService,
     private activatedroute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class UpdateContactComponent implements OnInit {
         },
         error: (err) => {
           console.error('Failed to fetch contact', err);
-          alert('Failed to load contact details. Please try again later.');
+          this.notification.showError("Failed to load contact details. Please try again later.");
         }
       });
     });
@@ -36,12 +38,12 @@ export class UpdateContactComponent implements OnInit {
   submit() {
     this.api.updatecontact(this.contactid, this.contactdata).subscribe({
       next: (res: contact) => {
-        alert('Contact Updated Successfully !!!');
         this.router.navigate(['/contactlist']);
+        this.notification.showSuccess("Contact Updated Successful !!!");
       },
       error: (err) => {
         console.error('Update failed', err);
-        alert('Failed to update contact. Please try again later.');
+        this.notification.showError("Failed to update contact. Please try again later.");
       }
     });
   }

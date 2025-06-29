@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { signup } from '../contactModel';
 import { ApiService } from '../../api.service';
 import { Router } from '@angular/router';
+import { CryptoService } from '../../services/crypto.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login-signup',
@@ -15,7 +17,9 @@ export class LoginSignupComponent implements OnInit {
   signupform!: FormGroup;
   loginform!: FormGroup;
   constructor(private formbuilder: FormBuilder, private http: HttpClient,
-    private api:ApiService, private router: Router){
+    private api:ApiService, private router: Router,
+    private cryptoService: CryptoService,
+    private notification: NotificationService){
 
   }
   ngOnInit(): void {
@@ -37,21 +41,21 @@ export class LoginSignupComponent implements OnInit {
     if (this.signupform.valid) {
       this.api.addsignupdata(this.signupform.value).subscribe({
         next: (res) => {
-          alert("Sign up Successful !!!");
+          this.notification.showSuccess("Sign up Successful !!!");
           this.signupform.reset();
           this.isShow = false;
         },
-        error: (err) => {
+        error: (err) => { 
           if (err.status === 0) {
             // Server is down or unreachable
-            alert("Cannot connect to the server, Please Connect Server.");
+            this.notification.showError("Cannot connect to the server, Please Connect Server.");
           } else if (err.status === 400) {
-            alert("Bad request. Please check the input.");
+            this.notification.showError("Bad request. Please check the input.");
           } else if (err.status === 409) {
-            alert("User already exists.");
+            this.notification.showWarning("User already exists.");
           } else {
             // Generic error
-            alert("An error occurred during signup. Please try again.");
+            this.notification.showError("An error occurred during signup. Please try again.");
           }
           console.error("Signup error:", err);
         }
@@ -70,21 +74,23 @@ export class LoginSignupComponent implements OnInit {
           });
 
           if (user) {
-            alert("Login successful !!!");
             this.loginform.reset();
             this.router.navigate(['/contactlist']);
+            this.notification.showSuccess("LogIn Successful !!!");
+            const encryptedUser = this.cryptoService.encryptData(user);
+            sessionStorage.setItem('loginData', encryptedUser);
           } else {
-            alert("User Not Found !!!");
+            this.notification.showWarning("User Not Found !!!");
             this.loginform.reset();
           }
         },
         error: (err) => {
           if (err.status === 0) {
-            alert("Cannot connect to the server, Please Connect Server.");
+            this.notification.showError("Cannot connect to the server, Please Connect Server.");
           } else if (err.status === 400) {
-            alert("Bad request. Please check your input.");
+            this.notification.showError("Bad request. Please check your input.");
           } else {
-            alert("An error occurred during login. Please try again.");
+            this.notification.showError("An error occurred during login. Please try again.");
           }
           console.error("Login error:", err);
         }

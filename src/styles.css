@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+.custom-snackbar {
+  background-color: #31cb34;
+  color: #0f0d0d;
+  font-size: 15px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(31, 30, 30, 0.2);
+}
+
+
+.toast-success {
+  background-color: #31cb34 !important; /* green */
+  color: #0f0d0d !important;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 6px rgba(31, 30, 30, 0.2);
+}
+
+.toast-error {
+  background-color: #e9291b !important;
+}
+
+.toast-info {
+  background-color: #2196f3 !important;
+}
+
+.toast-warning {
+  background-color: #ff9800 !important;
+}

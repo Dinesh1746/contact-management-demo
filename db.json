@@ -1,10 +1,17 @@
 {
   "contacts": [
     {
-      "id": "db49",
+      "id": "128f",
+      "firstname": "Tarun",
+      "lastname": "Ede",
+      "phonenumber": "9666917815",
+      "city": "Hyderabad"
+    },
+    {
+      "id": "2dc4",
       "firstname": "Dinesh",
       "lastname": "Ede",
-      "phonenumber": 7997402944,
+      "phonenumber": "4566326170",
       "city": "Hyd"
     }
   ],
@@ -12,20 +19,8 @@
     {
       "id": "51b5",
       "name": "Dinesh",
-      "email": "dineshsairenu@gmail.com",
+      "email": "dinesh@gmail.com",
       "password": "Dinesh@123"
-    },
-    {
-      "id": "0118",
-      "name": "tarun",
-      "email": "tarun@gmail.com",
-      "password": "Tarun@123"
-    },
-    {
-      "id": "86bb",
-      "name": "Rohini",
-      "email": "Rohini@gmail.com",
-      "password": "Rohini@123"
     }
   ]
 }
