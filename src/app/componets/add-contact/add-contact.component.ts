@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { contact } from '../contactModel';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -13,7 +14,8 @@ export class AddContactComponent implements OnInit {
   contactform:FormGroup | any;
   constructor(private formbuilder: FormBuilder,
     private router: Router,
-    private api:ApiService
+    private api:ApiService,
+    private notification: NotificationService
   ){}
 
   ngOnInit(): void {
@@ -35,15 +37,15 @@ export class AddContactComponent implements OnInit {
         },
         error: (err) => {
           if (err.status === 0) {
-            // Server is down or unreachable
-            alert("Cannot connect to the server, Please Connect Server.");
+            // Server is down or unreachable 
+            this.notification.showError("Cannot connect to the server, Please Connect Server.");
           } else if (err.status === 400) {
-            alert("Bad request. Please check the input.");
+            this.notification.showError("Bad request. Please check the input.");
           } else if (err.status === 409) {
-            alert("User already exists.");
+            this.notification.showWarning("User already exists.");
           } else {
             // Generic error
-            alert("An error occurred during Add Contact. Please try again.");
+            this.notification.showError("An error occurred during Add Contact. Please try again.");
           }
           console.error("Add Contact error:", err);
         }
